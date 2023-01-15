@@ -9,14 +9,21 @@ import {Movie} from "../../models/movie";
 })
 export class HomeComponent implements OnInit {
 
-  movies: Movie[] = [];
-
+  popularMovies: Movie[] = [];
+  topRatedMovies: Movie[] = []
+  upcomingMovies: Movie[] = []
   constructor(private moviesService: MoviesService) {
   }
 
   ngOnInit(): void {
-    this.moviesService.getMovies().subscribe((response: any) => {
-      this.movies = response.results
+    this.moviesService.getMovies('popular').subscribe((response) => {
+      this.popularMovies = response.results
+    })
+    this.moviesService.getMovies('top_rated').subscribe((response) => {
+      this.topRatedMovies = response.results
+    })
+    this.moviesService.getMovies('upcoming').subscribe((response) => {
+      this.upcomingMovies = response.results
     })
   }
 
