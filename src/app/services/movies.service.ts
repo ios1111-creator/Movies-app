@@ -20,4 +20,11 @@ export class MoviesService {
       }))
   }
 
+  searchMovies(search:number){
+    return this.http.get<MovieDto>(`${this.baseUrl}/movie/popular?page=${search}&api_key=${this.apiKey}`)
+      .pipe(switchMap(res => {
+        return of (res.results)
+      }))
+  }
+
 }
